@@ -1,6 +1,6 @@
 import boto3
 from action import action
-
+from probe import probe
 
 def put_tabel(dynamodb=None):
     if not dynamodb:
@@ -24,4 +24,6 @@ if __name__ == '__main__':
     table_name = 'students'
 
     dynamodb = boto3.resource('dynamodb')
-    action(dynamodb,region=my_region,table_name=table_name)
+    #action(dynamodb,region=my_region,table_name=table_name)
+
+    probe(dynamodb,primary_region = my_region, secondary_region = "us-east-1",table_name=table_name)
