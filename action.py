@@ -1,10 +1,14 @@
 
 import boto3
-def action(dynamodb,region,table_name):
+def action(dynamodb,region):
     if not dynamodb:
         dynamodb = boto3.resource('dynamodb',region_name = region)
     
 
-    table = dynamodb.Table(table_name)
-    table.delete()
+    
+    tables = list(dynamodb.tables.all())
+
+    for table in tables:
+        table.delete()
+
 
